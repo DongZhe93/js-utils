@@ -15,3 +15,11 @@ function getDay (year, month) {
         return 29;
     } else return 28;
 }
+
+/**
+ * 获取时间戳当前时间
+ * @returns {number}
+ */
+function getTimeNow() {
+    return +new Date();//等同于new Date().getTime();
+}
