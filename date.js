@@ -23,3 +23,46 @@ function getDay (year, month) {
 function getTimeNow() {
     return +new Date();//等同于new Date().getTime();
 }
+
+/**
+ * 时间戳转换成指定格式日期
+ * @param timestamp
+ * @param formats
+ * // formats格式包括
+ * Y-M-D
+ * Y-M-D H:i:s
+ * Y年M月D日
+ * Y年M月D日 H时i分s秒
+ * Y/M/D H:i:s
+ * @returns {string}
+ */
+function dateFormat(timestamp, formats) {
+    formats = formats ||'Y-M-D';
+    var zero = function (value) {
+        if (value < 10) {
+            return '0' + value;
+        }
+        return value;
+    };
+
+    var myDate = timestamp? new Date(timestamp): new Date();
+
+    var year = myDate.getFullYear();
+    var month = zero(myDate.getMonth() + 1);
+    var day = zero(myDate.getDate());
+
+    var hour = zero(myDate.getHours());
+    var minite = zero(myDate.getMinutes());
+    var second = zero(myDate.getSeconds());
+
+    return formats.replace(/Y|M|D|H|i|s/ig, function (matches) {
+        return ({
+            Y: year,
+            M: month,
+            D: day,
+            H: hour,
+            i: minite,
+            s: second
+        })[matches];
+    });
+}
