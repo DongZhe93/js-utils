@@ -1,3 +1,0 @@
-window.isInWeixinApp = function() {
-    return /MicroMessenger/.test(navigator.userAgent);
-};
