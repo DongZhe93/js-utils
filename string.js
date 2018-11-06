@@ -14,3 +14,41 @@ function getTextLen(str) {
 function getRandom() {
     return Math.random().toString(36).substring(2, 10);
 }
+
+/**
+ * 处理SpringMVC POST传参
+ * @param obj 对象
+ */
+function handleFormObject(obj) {
+    var newobj = {};
+
+    function handleObject(prevkey, data) {
+        for (var key in data) {
+            var val = data[key] || '';
+            if (Object.prototype.toString.call(val) === '[object Object]') {
+                prevkey ? handleObject(prevkey + '.' + key, val) : handleObject(key, val);
+            } else if (Object.prototype.toString.call(val) === '[object Array]') {
+                prevkey ? handleArray(prevkey + '.' + key, val) : handleArray(key, val);
+            } else {
+                prevkey ? newobj[prevkey + '.' + key] = val : newobj[key] = val;
+            }
+        }
+    }
+
+    handleObject('', obj);
+    return newobj;
+
+    function handleArray(prevkey, data) {
+        var len = data.length;
+        for (var i = 0; i < len; i++) {
+            var val = data[i] || '';
+            if (Object.prototype.toString.call(val) === '[object Object]') {
+                handleObject(prevkey + '[' + i + ']', val)
+            } else if (Object.prototype.toString.call(val) === '[object Array]') {
+                handleArray(prevkey + '[' + i + ']', val);
+            } else {
+                newobj[prevkey + '[' + i + ']'] = val;
+            }
+        }
+    }
+}
