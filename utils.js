@@ -51,3 +51,8 @@ function getQueryFromURL(url) {
 function isCertifiedRequset(referer, host) {
     return referer === undefined || referer.match(/(https?:\/\/)([\w+\.]+(:[0-9]+)?)\/.+/)[2] === host;
 }
+
+
+// JAVA urlencode
+// String encoded = URLEncoder.encode(value, encoding);
+// encoded.replace("+", "%20").replace("*", "%2A").replace("~", "%7E").replace("/", "%2F");
