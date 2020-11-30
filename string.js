@@ -52,3 +52,15 @@ function handleFormObject(obj) {
         }
     }
 }
+
+/**
+ * unicode 字符串处理
+ * @param unicode unicode字符串
+ * @return {string}
+ */
+function unicodeToStr (unicode) {
+    return unicode.replace(/\\u[0-9a-fA-F]{1,4}/g, function (unicode) {
+      unicode = unicode.split('\\u')[1]
+      return String.fromCharCode(parseInt(unicode, 16))
+    })
+  }
