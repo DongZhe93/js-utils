@@ -60,7 +60,7 @@ function handleFormObject(obj) {
  */
 function unicodeToStr (unicode) {
     return unicode.replace(/\\u[0-9a-fA-F]{1,4}/g, function (unicode) {
-      unicode = unicode.split('\\u')[1]
-      return String.fromCharCode(parseInt(unicode, 16))
+        unicode = unicode.split('\\u')[1]
+        return String.fromCharCode(parseInt(unicode, 16))
     })
-  }
+}
